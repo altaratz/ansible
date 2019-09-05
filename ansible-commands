@@ -1,0 +1,19 @@
+# To use ansible shell command to the host you want to manage use the next:
+
+# ansible -m shell -a 'df -h' all
+# in the 'the command you want to execute on the host'
+# all refer to all the hosts you set in the host file
+# The host file is located in /etc/ansible/host - it can contain ip's or hosts names
+# In the ansible.cfg you can change the path to the host file and add more configuration.
+
+# if you need to execute command as a root user in the host you are working on you need to use the "-b" flag if your platform need a password for using sudo comamnd you need the "-k" flag.
+# for example: ansible -b -k -m user -a 'name=testuser' all - this will add the user "testuser" to all the hosts and it will ask you to insert the sudo password before it connect to the server.
+
+# to check if the user indeed was created use ansible command:
+# ansible -m shell -a 'getent passwd | grep testuser' all
+
+# to remove the users you have created you can run:
+# ansible -b -k -m user -a 'name=testuser state=absent' all
+
+#
+
